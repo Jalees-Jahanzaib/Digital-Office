@@ -14,7 +14,7 @@ class Files(models.Model):
     summary=models.TextField()
     date_posted=models.DateTimeField(auto_now_add=True)
     author=models.ForeignKey(User,on_delete=models.CASCADE)
-    Roles=models.CharField(max_length=1,choices=YEAR_IN_SCHOOL_CHOICES,default='S')
+    Roles=models.CharField(max_length=10,choices=YEAR_IN_SCHOOL_CHOICES,default='Scan')
 
     def __str__(self):
         return self.title
