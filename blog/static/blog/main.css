@@ -13,7 +13,7 @@ body {
   }
   
   .bg-steel {
-    background-color: #5f788a;
+    background-color: #33ACFF;
   }
   
   .site-header .navbar-nav .nav-link {
@@ -81,17 +81,3 @@ body {
   
   .account-heading {
     font-size: 2.5rem;
-  }
-  #webcoderskull{
-    position: absolute;
-    left: 0;
-    top: 50%;
-    padding: 0 20px;
-    width: 100%;
-    text-align: center;
-}
-
-canvas{
-    height:100vh;
-    background-color:#46a009;
-}
