@@ -3,11 +3,18 @@ from django.utils import timezone
 from django.contrib.auth.models import User, Group
 # Create your models here.
 class Files(models.Model):
+    YEAR_IN_SCHOOL_CHOICES = [
+    ('S', 'Scan'),
+    ('1', 'Phase 1'),
+    ('2', 'Phase 2'),
+    ('3', 'Phase 3'),
+    ('F', 'Final'),
+]
     title=models.CharField(max_length=100)
     summary=models.TextField()
     date_posted=models.DateTimeField(auto_now_add=True)
     author=models.ForeignKey(User,on_delete=models.CASCADE)
-
+    Roles=models.CharField(max_length=1,choices=YEAR_IN_SCHOOL_CHOICES,default='S')
 
     def __str__(self):
         return self.title
