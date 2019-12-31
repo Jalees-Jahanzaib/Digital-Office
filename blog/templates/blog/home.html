@@ -7,7 +7,7 @@
         <a class="mr-2" href="#">{{ file.author }}</a>
         <small class="text-muted">{{ file.date_posted | date:"F d, Y" }}</small>
       </div>
-      <h2><a class="article-title" href="#">{{ file.title }}</a></h2>
+      <h2><a class="article-title" href="{% url 'file-detail' file.id %}">{{ file.title }}</a></h2>
       <p class="article-content">{{ file.content }}</p>
     </div>
   </article>
