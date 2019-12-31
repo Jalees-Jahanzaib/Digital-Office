@@ -30,6 +30,31 @@ class FileCreateView(CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+class FileUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Files
+    fields = ['title', 'summary']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
+
+
+class FileDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Files
+    success_url = '/blog'
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
+
 
 
 
