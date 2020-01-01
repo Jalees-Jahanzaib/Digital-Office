@@ -9,7 +9,7 @@ from django.views.generic import (
 )
 from .models import Files
 from .forms import  CommentForm
-
+from users.models import Profile
 def home(request):
     context={
         'Files': Files.objects.all()
@@ -65,6 +65,17 @@ def add_comment_to_post(request, pk):
         if form.is_valid():
             comment = form.save(commit=False)
             form.instance.author = request.user
+            if request.user.is_staff and request.user.is_superuser :
+                form.instance.role = "Final"
+        
+            elif  request.user.is_superuser:
+                form.instance.role = "Phase 2"
+            elif request.user.is_staff  :
+                form.instance.role = "Phase 1"
+        
+            else :
+                form.instance.role = "Scan"
+
             comment.files = post
             comment.save()
             return redirect('file-detail', pk=post.pk)

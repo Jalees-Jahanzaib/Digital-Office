@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User, Group
 from django.urls import reverse
+from users.models import Profile
 # Create your models here.
 class Files(models.Model):
    
@@ -18,6 +19,7 @@ class Comment(models.Model):
     files = models.ForeignKey('blog.Files', on_delete=models.CASCADE, related_name='comments')
     author = models.CharField(max_length=200)
     text = models.TextField()
+    role = models.CharField(max_length=200,default="Scan")
     created_date = models.DateTimeField(default=timezone.now)
     approved_comment = models.BooleanField(default=False)
 
