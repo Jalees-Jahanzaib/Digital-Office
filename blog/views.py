@@ -7,6 +7,8 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
+from django.contrib.auth.decorators import login_required
+
 from .models import Files
 from .forms import  CommentForm
 from users.models import Profile
@@ -56,7 +58,7 @@ class FileDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
 
-
+@login_required
 def add_comment_to_post(request, pk):
     post = get_object_or_404(Files, pk=pk)
     if request.method == "POST":
