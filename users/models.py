@@ -4,7 +4,15 @@ from PIL import Image
 
 # Create your models here.
 class Profile(models.Model):
+    YEAR_IN_SCHOOL_CHOICES = [
+    ('S', 'Scan'),
+    ('1', 'Phase 1'),
+    ('2', 'Phase 2'),
+    ('3', 'Phase 3'),
+    ('F', 'Final'),
+]
     user = models.OneToOneField(User,on_delete=models.CASCADE)
+    roles=models.CharField(max_length=10,choices=YEAR_IN_SCHOOL_CHOICES,default='Scan')
     image = models.ImageField(default='default.jpg',upload_to='profile_pics')
     
     def __str__(self):

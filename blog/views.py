@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404,redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
     ListView,
@@ -8,6 +8,7 @@ from django.views.generic import (
     DeleteView
 )
 from .models import Files
+from .forms import  CommentForm
 
 def home(request):
     context={
@@ -56,7 +57,20 @@ class FileDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 
+def add_comment_to_post(request, pk):
+    post = get_object_or_404(Files, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
 
+        if form.is_valid():
+            comment = form.save(commit=False)
+            form.instance.author = request.user
+            comment.files = post
+            comment.save()
+            return redirect('file-detail', pk=post.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'blog/add_comment_to_post.html', {'form': form})
 
        
 def about(request): 
