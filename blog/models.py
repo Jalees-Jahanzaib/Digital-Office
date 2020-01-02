@@ -9,7 +9,8 @@ class Files(models.Model):
    
     title=models.CharField(max_length=100)
     summary=models.TextField()
-    
+    #upload = models.FileField(upload_to='images',null=True,blank=True) 
+
     date_posted=models.DateTimeField(default=timezone.now)
     author=models.ForeignKey(User,on_delete=models.CASCADE)
 
@@ -30,10 +31,6 @@ class Comment(models.Model):
     stage3=models.CharField(max_length=7,default="False")
     final=models.CharField(max_length=7,default="False")
 
-
-    def lol(self):
-        print('2')
-        return
         
     def approve(self):
         self.approved_comment = True
@@ -41,6 +38,5 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text
-        
-    
+
 

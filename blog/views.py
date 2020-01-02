@@ -11,7 +11,6 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Files
 from .forms import  CommentForm
-from users.models import Profile
 def home(request):
     context={
         'Files': Files.objects.all()
@@ -97,3 +96,5 @@ def add_comment_to_post(request, pk):
        
 def about(request): 
     return render(request,"blog/about.html")
+
+
