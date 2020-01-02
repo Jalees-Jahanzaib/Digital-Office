@@ -17,6 +17,7 @@ def home(request):
         'Files': Files.objects.all()
     }
     
+    
     return render(request,"blog/home.html",context)
 class FileListView(ListView):
     model= Files
@@ -69,14 +70,22 @@ def add_comment_to_post(request, pk):
             form.instance.author = request.user
             if request.user.is_staff and request.user.is_superuser :
                 form.instance.role = "Final"
+                form.instance.final="True"
+                print(form.instance.final,type(form.instance.final))
         
             elif  request.user.is_superuser:
                 form.instance.role = "Phase 2"
+                form.instance.stage3="True"
+
             elif request.user.is_staff  :
                 form.instance.role = "Phase 1"
+                form.instance.stage2="True"
+
         
             else :
                 form.instance.role = "Scan"
+                form.instance.stage1="True"
+
 
             comment.files = post
             comment.save()

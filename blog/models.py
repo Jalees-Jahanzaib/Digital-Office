@@ -25,7 +25,16 @@ class Comment(models.Model):
     role = models.CharField(max_length=200,default="Scan")
     created_date = models.DateTimeField(default=timezone.now)
     approved_comment = models.BooleanField(default=False)
+    stage1=models.CharField(max_length=7,default="False")
+    stage2=models.CharField(max_length=7,default="False")
+    stage3=models.CharField(max_length=7,default="False")
+    final=models.CharField(max_length=7,default="False")
 
+
+    def lol(self):
+        print('2')
+        return
+        
     def approve(self):
         self.approved_comment = True
         self.save()
